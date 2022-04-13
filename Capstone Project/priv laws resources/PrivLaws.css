@@ -1,3 +1,7 @@
+html {
+    scroll-behavior: smooth;
+}
+
 .page_header {
     font-family: sans-serif;
     width: 100%;
