@@ -7,36 +7,1106 @@
     <title>Team 3 Capstone Project</title>
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto|Open+Sans">
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
     <link href="https://fonts.googleapis.com/css?family=Quicksand&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="style.css">
-    <link rel="stylesheet" href="PrivLaws.css"
+    <link rel="stylesheet" href="priv laws resources/PrivLaws.css">
     <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.2.23/angular.js"></script>
+    <script src="priv laws resources/raphael.js"></script>
+    <script src="priv laws resources/jquery.usmap.js"></script>
     <script src="main.js"></script>
 
 </head>
 <body ng-controller="ctrl">
-    <header>
-        <h1 id="header-left" onclick="window.location.href='main.html'">Cashierless</h1>
-        <h1 id="header-right" onclick="window.location.href='main.html'">Retail</h1>
-        <i id="moon" class="fa fa-moon-o"></i>
-        <a href="NewsFeed.html" id="NewsFeed">News Feed</a>
-        <a href="PrivacyTracker.html" id="PrivTrack">Privacy Tracker</a>
-        <a href="PrivacyLaws.html" id="PrivLaws" class = "click">Privacy Laws</a>
-        <a href="Map.html" id="map">Map</a>
-    </header>
-
-    <div class="container_map">
-        <h2>Consumer Privacy Laws in the United States</h2>
-        <div class="term key">
-            <p><b>Introduced</b> — A bill has been introduced on a legislative chamber floor but has not yet moved into committee.</p>
-            <p><b>In Committee</b> — A bill is moving through the various committees in its chamber of origin.</p>
-            <p><b>In Cross Chamber</b> — A bill has passed a vote in its chamber of origin and moved to the opposite chamber of the legislature (e.g., a state house of representatives passed a bill and it moved to the state senate).</p>
-            <p><b>In Cross Committee</b> — A bill is moving through the various committees in its non-originating chamber.</p>
-            <p><b>Passed</b> — Both chambers of the legislature have passed the bill.</p>
-            <p><b>Signed</b> — The governor signed the bill and it is now law.</p>
-        </div>
-
+    <div id="header">
+        <header>
+            <h1 id="header-left" onclick="window.location.href='main.html'">Cashierless</h1>
+            <h1 id="header-right" onclick="window.location.href='main.html'">Retail</h1>
+            <a href="NewsFeed.html">News Feed</a>
+            <a href="PrivacyTracker.html">Privacy Tracker</a>
+            <a href="PrivacyLaws.html"class="click">Privacy Laws</a>
+            <a href="Map.html">Map</a>
+        </header>
     </div>
 
+    <div class="page_header">
+        <h2>Consumer Privacy Laws in the United States</h2>
+        <h3>An interactive map of US State Privacy Legislation as of 2022.</h3>
+    </div>
+    <div class="map_body">
+        <p><span id="inactive_key">▶</span><b>Inactive Bills</b> — Previous bill that is currently inactive.</p>
+        <p><span id="no_bills_key">▶</span><b>No Bills</b> — No comprehensive bills have been introduced.</p>
+        <p><span id="intro_key">▶</span><b>Introduced</b> — A bill has been introduced on a legislative chamber floor but has not yet moved into committee.</p>
+        <p><span id="in_com_key">▶</span><b>In Committee</b> — A bill is moving through the various committees in its chamber of origin.</p>
+        <p><span id="in_cross_cham_key">▶</span><b>In Cross Chamber</b> — A bill has passed a vote in its chamber of origin and moved to the opposite chamber of the legislature (e.g., a state house of representatives passed a bill and it moved to the state senate).</p>
+        <p><span id="in_cross_com_key">▶</span><b>In Cross Committee</b> — A bill is moving through the various committees in its non-originating chamber.</p>
+        <div id="top"></div>
+        <p><span id="passed_key">▶</span><b>Passed</b> — Both chambers of the legislature have passed the bill.</p>
+        <p><span id="signed_key">▶</span><b>Signed</b> — The governor signed the bill and it is now law.</p>
+
+        <div id="map" style="width: 800px; height: 550px"></div>
+        <div id="clicked-state"></div>
+
+        <div class="state_info">
+            <div id="map_instruction">Click a state to display privacy laws</div>
+            <div id="state_title"></div>
+            <div id="no_bills_info">
+                <p>There have been no bills introduced.</p>
+            </div>
+            <div id='AK_info'> <!-- In Committee -->
+                <p>There are three bills in committee:
+                    <a href="#AK_1">HB 159</a>,
+                    <a href="#AK_2">SB 116</a>, and
+                    <a href="#AK_3">HB 222</a>
+                </p>
+                <div class="anchor" id="AK_1">
+                    <h2><a href="http://www.akleg.gov/basis/Bill/Detail/32?Root=HB159" target="_blank">Consumer Data Privacy Act</a></h2>
+                    <p>An Act establishing the Consumer Data Privacy Act; establishing data broker registration requirements; making a violation
+                        of the Consumer Data Privacy Act an unfair or deceptive trade practice; and providing for an effective date</p>
+                    <p>Proposed by House Rules by request of the Governor</p>
+                    <h3>Timeline</h3>
+                    <li>03/31/2021 Bill introduced; First Reading</li>
+                    <li>02/07/2022 Referred to Judiciary</li>
+                </div>
+                <div class="anchor" id="AK_2">
+                    <h2><a href="http://www.akleg.gov/basis/Bill/Detail/32?Root=SB116" target="_blank">Consumer Data Privacy Act</a></h2>
+                    <p>An Act establishing the Consumer Data Privacy Act; establishing data broker registration requirements; making a violation
+                        of the Consumer Data Privacy Act an unfair or deceptive trade practice; and providing for an effective date</p>
+                    <p>Proposed by Senate Rules by request of the Governor</p>
+                    <h3>Timeline</h3>
+                    <li>03/31/2021 Bill introduced; First Reading</li>
+                    <li>03/31/2021 Referred to Labor & Commerce</li>
+                </div>
+                <div class="anchor" id="AK_3">
+                    <h2><a href="http://www.akleg.gov/basis/Bill/Detail/32?Root=HB222" target="_blank">Alaska Consumer Information Protection Act</a></h2>
+                    <p>An Act relating to personal information; relating to the privacy of personal information; relating to the collection, sale, sharing,
+                        deletion, correction, and use of personal information; relating to breaches of security of personal information; relating to genetic
+                        privacy; relating to social security numbers; and providing for an effective date</p>
+                    <p>Proposed by Representatives Rauscher and McCarty</p>
+                    <h3>Timeline</h3>
+                    <li>01/18/2022 Bill introduced; First Reading</li>
+                    <li>01/18/2022 Referred to Labor & Commerce</li>
+                </div>
+            </div>
+            <div id='AZ_info'> <!-- Inactive -->
+                <p>There is one inactive Bill:
+                    <a href="#AZ_1">HB 2790</a>
+                </p>
+                <div class="anchor" id="AZ_1">
+                    <h2><a href="https://apps.azleg.gov/BillStatus/BillOverview/77859" target="_blank">House Bill 2790</a></h2>
+                    <p>An Act amending Title 18, Chapter 5, Arizona Revisted Statues, by adding Article 5; relating to personal data</p>
+                    <p>Proposed by Representatives DeGrazia, Andrade, Cano, Mathis, Pawlik, Powers Hannley</p>
+                </div>
+            </div>
+            <div id='CA_info'> <!-- Signed -->
+                <p>There are two signed bills:
+                    <a href="#CA_1">CCPA</a> and
+                    <a href="#CA_2">Proposition 24</a>
+                </p>
+                <div class="anchor" id="CA_1">
+                    <h2><a href="https://leginfo.legislature.ca.gov/faces/billTextClient.xhtml?bill_id=201720180SB1121" target="_blank">California Consumer Privacy Act</a></h2>
+                    <p><em>Effective Jan. 1, 2020</em></p>
+                    <p>An Act aims to give consumers more control over the personal information businesses collect. This law gives California residents the right to know how their information is used
+                        and shared, the right to delete personal information collected from them, the right to opt-out of the sale of the personal information, and the right to non-discrimination for
+                        exercising their CCPA rights. Businesses are also required to notify consumers of their privacy practices. The CCPA only applies to for-profit businesses in California that have
+                        a gross annual revenue of over $25 million; buy, receive, or sell personal information of 50,000 or more California residents, households, or devices; or derive more than 50% of
+                        their annual revenue from selling California residents’ personal information.</p>
+                    <p>Proposed by Senator Dodd</p>
+                    <h3>Timeline</h3>
+                    <li>02/13/2018 Bill introduced; First Reading; To Com. on RLS. for assignment.</li>
+                    <li>02/22/2018 Referred to Coms. on JUD. and APPR.</li>
+                    <li>04/09/2018 From committee with author's amendments. Read second time and amended. Re-referred to Com. on JUD</li>
+                    <li>04/25/2018 From committee: Do pass as amended and re-refer to Com. on APPR. Ayes 5, Noes 2</li>
+                    <li>04/26/2018 Second Reading and amended. Re-referred to Com. on APPR.</li>
+                    <li>05/25/2018 From committee: Do pass as amended. Ayes 5, Noes 2. </li>
+                    <li>05/25/2018 Second Reading and amended. Ordered to second reading</li>
+                    <li>05/29/2018 Second Reading; Ordered to third reading</li>
+                    <li>05/30/2018 Third Reading; Passed Ayes 22, Noes 13; Ordered to the Assembly.</li>
+                    <li>06/07/2018 Referred to Coms. on P. & C.P. and JUD.</li>
+                    <li>06/19/2018 From committee: Do pass and re-refer to Com. on P. & C.P. Ayes 6, Noes 3</li>
+                    <li>07/05/2018 From committee: Do pass as amended. Ayes 9, Noes 0</li>
+                    <li>08/06/2018 Second Reading and amended. Ordered to second reading</li>
+                    <li>08/07/2018 Second Reading; Ordered to third reading</li>
+                    <li>08/24/2018 Re-referred to Coms. on P. & C.P. and APPR</li>
+                    <li>08/27/2018 From committee with author's amendments. Read second time and amended. Re-referred to Com. on P. & C.P.</li>
+                    <li>08/28/2018 From committee: Do pass and re-refer to Com. on APPR. Ayes 10, Noes 0</li>
+                    <li>08/31/2018 Second Reading; Ordered to third reading</li>
+                    <li>08/32/2018 Third Reading; Urgency clause adopted; PassedAyes 79, Noes 0; Ordered to the Senate</li>
+                    <li>09/12/2018 Enrolled and presented to the Governor</li>
+                    <li>09/23/2018 Governor Approved</li>
+                    <li>09/23/2018 Chaptered by Secretary of State</li>
+                </div>
+                <div class="anchor" id="CA_2">
+                    <h2><a href="https://ballotpedia.org/California_Proposition_24,_Consumer_Personal_Information_Law_and_Agency_Initiative_(2020)" target="_blank">California Privacy Rights Act</a></h2>
+                    <p><em>Effective Jan. 1, 2023</em></p>
+                    <p>The initiative represents an expansion of provisions first laid out by the California Consumer Privacy Act. In addition to the consumer protections, the proposition creates the
+                        California Privacy Protection Agency. The agency will share consumer privacy oversight and enforcement duties with the California Department of Justice. Another effect of the
+                        initiative is requiring businesses to obtain permission from consumers younger than 16 before collecting their data and permission from a parent or guardian before collecting data
+                        from consumers younger than 13.</p>
+                    <p>Proposed by Mactaggart</p>
+                    <h3>Timeline</h3>
+                    <li>10/09/2019 Ballot initiative filed</li>
+                    <li>02/13/2020 Passed 25% signature threshold</li>
+                    <li>05/04/2020 Campaign submitted 930,983 signatures</li>
+                    <li>11/03/2020 Ballot vote; Passed Yes 56.23%, No 43.77%</li>
+                </div>
+            </div>
+            <div id='CO_info'> <!-- Signed -->
+                <p>There is one signed bill:
+                    <a href="#CO_1">SB 190</a>
+                </p>
+                <div class="anchor" id="CO_1">
+                    <h2><a href="https://leg.colorado.gov/bills/sb21-190" target="_blank">Colorado Privacy Act</a></h2>
+                    <p><em>Effective Jul. 1, 2023</em></p>
+                    <p>The act creates personal data privacy rights and applies to legal entities that conduct business or produce
+                        commercial products or services that are intentionally targeted to Colorado residents and that either control
+                        or process personal data of at least 100,000 consumers per calendar year; or derive revenue from the sale of
+                        personal data and control or process the personal data of at least 25,000 consumers; and does not apply to
+                        certain specified entities including state and local governments and state institutions of higher education,
+                        personal data governed by listed state and federal laws, listed activities, and employment records.</p>
+                    <p>Proposed by Senators Rodriguez and Lundeen; cosponsored by Representatives Duran and Carver</p>
+                    <h3>Timeline</h3>
+                    <li>03/19/2021 Bill introduced, Assigned to Business, Labor, & Technology</li>
+                    <li>05/05/2021 Committee on Business, Labor, & Technology Refer Amended to Appropriations</li>
+                    <li>05/14/2021 Committee on Appropriations Refer Unamended to Senate Committee of the Whole</li>
+                    <li>05/25/2021 Second Reading Passed with Amendments - Committee, Floor</li>
+                    <li>05/26/2021 Third Reading Passed - No Amendments</li>
+                    <li>05/27/2021 Introduced In House - Assigned to Finance</li>
+                    <li>06/02/2021 Committee on Finance Refer Amended to Appropriations</li>
+                    <li>06/03/2021 Committee on Appropriations Refer Unamended to House Committee of the Whole</li>
+                    <li>06/04/2021 Second Reading Special Order - Passed with Amendments - Committee, Floor</li>
+                    <li>06/07/2021 Third Reading Passed - No Amendments</li>
+                    <li>06/25/2021 Signed by the Senate Speaker and Senate President</li>
+                    <li>06/25/2021 Sent to Governor</li>
+                    <li>07/07/2021 Governor Signed</li>
+                </div>
+            </div>
+            <div id='CT_info'> <!-- In Committee -->
+                <p>There is one bill in committee:
+                    <a href="#CT_1">SB 6</a>
+                </p>
+                <div class="anchor" id="CT_1">
+                    <h2><a href="https://www.cga.ct.gov/asp/cgabillstatus/cgabillstatus.asp?selBillType=Bill&bill_num=SB00006&which_year=2022" target="_blank">Senate Bill 6</a></h2>
+                    <p>An Act concerning personal data privacy and online monitoring to: (1) Establish (A) a framework for controlling and processing personal data, and (B)
+                        responsibilities and privacy protection standards for data controllers and processors; and (2) grant consumers the right to (A) access, correct, delete
+                        and obtain a copy of personal data, and (B) opt out of the processing of personal data for the purposes of (i) targeted advertising, (ii) certain sales
+                        of personal data, or (iii) profiling in furtherance of decisions that produce legal or similarly significant effects concerning consumers.</p>
+                    <p>Proposed by General Law Committee</p>
+                    <h3>Timeline</h3>
+                    <li>02/09/2022 Bill introduced; Referred to Joint Committee on General Law</li>
+                    <li>02/25/2022 Public Hearing</li>
+                    <li>03/25/2022 Referred to Office of Legislative Research and Office of Fiscal Analysis</li>
+                    <li>03/31/2022 Reported Out of Legislative Commissioners' Office</li>
+                    <li>04/07/2022 Referred by Senate to Committee on Judiciary</li>
+                </div>
+            </div>
+            <div id='FL_info'> <!-- Inactive -->
+                <p>There are two inactive Bills:
+                    <a href="#FL_1">SB 1864</a> and
+                    <a href="#FL_2">HB 9</a>
+                </p>
+                <div class="anchor" id="FL_1">
+                    <h2><a href="https://www.flsenate.gov/Session/Bill/2022/1864" target="_blank">Florida Privacy Protection Act</a></h2>
+                    <p>Consumer Data Privacy; Creating the "Florida Privacy Protection Act"; requiring controllers that collect consumer personal information to provide certain
+                        information to the consumer; providing that consumers have the right to opt out of the sale and processing of their personal information by controllers;
+                        prohibiting controllers from selling the personal information of consumers younger than a specified age without express authorization from the consumer
+                        or the consumer’s parent or guardian under certain circumstances; specifying violations that are enforceable by the Department of Legal Affairs under the
+                        Florida Deceptive and Unfair Trade Practices Act; revising the purposes for which the Legal Affairs Revolving Trust Fund may be used to include enforcement
+                        of the Florida Privacy Protection Act by the Attorney General, etc. </p>
+                    <p>Proposed by Senators Bradley and Rodrigues</p>
+                    <h3>Timeline</h3>
+                    <li>01/07/2022 Bill introduced</li>
+                    <li>01/12/2022 First Reading, Referred to Commerce and Tourism; Regulated Industries; Rules -SJ 160</li>
+                    <li>01/18/2022 Introduced -SJ 160</li>
+                    <li>03/12/2022 Indefinitely postponed and withdrawn from consideration</li>
+                    <li>03/14/2022 Died in Commerce and Tourism</li>
+                </div>
+                <div class="anchor" id="FL_2">
+                    <h2><a href="https://www.myfloridahouse.gov/Sections/Bills/billsdetail.aspx?BillId=76556" target="_blank">House Bill 9</a></h2>
+                    <p>Requires collectors to provide notice to consumers about data collection, sharing, & selling practices; provides consumers right
+                        to request data be disclosed, deleted, or corrected & to opt-in or opt-out of sale or sharing of data; provides nondiscrimination
+                        measures, methods for requesting data & opting-in or opting-out of sale or sharing of data, private cause of action, & enforcement;
+                        preempts regulation of consumer date collection, sharing, & selling to the state.</p>
+                    <p>Proposed by Representative McFarland</p>
+                    <h3>Timeline</h3>
+                    <li>01/11/2022 Bill introduced</li>
+                    <li>01/11/2022 First Reading</li>
+                    <li>01/12/2022 Referred to Commerce Committee; Referred to Judiciary Committee</li>
+                    <li>02/10/2022 Reported out of Commerce Committee</li>
+                    <li>02/24/2022 Reported out of Judiciary Committee; Referred to House Calendar</li>
+                    <li>02/24/2022 First Reading</li>
+                    <li>03/01/2022 Second Reading</li>
+                    <li>03/02/2022 Third Reading, CS passed as amended yeas 103, nays 8</li>
+                    <li>03/02/2022 Referred to Judiciary</li>
+                    <li>03/14/2022 Died in Judiciary</li>
+                </div>
+            </div>
+            <div id='GA_info'> <!-- Inactive -->
+                <p>There is one inactive Bill:
+                    <a href="#GA_1">SB 394</a>
+                </p>
+                <div class="anchor" id=GA_1">
+                    <h2><a href="https://www.flsenate.gov/Session/Bill/2022/1864" target="_blank">Georgia Computer Data Privacy Act</a></h2>
+                    <p>A Bill to be entitled an Act to amend Titles 10 and 50 of the O.C.G.A., relating to commerce and trade and state government,
+                        respectively, so as to enact the "Georgia Computer Data Privacy Act"; to provide for related matters; to provide for effective
+                        dates; to repeal conflicting laws; and for other purposes. </p>
+                    <p>Proposed by Senators Dolezal, Miller, Dugan, Ginn, Burke, Kennedy, Brass, Rhett, Burns, Anderson, Hatchett, Payne, Mullis, Albers,
+                        Gooch, Strickland, Anavitarte, James, Walker III, Hickman, Beach, Hufstetler, Cowsert, Tillery, Harbin
+                    </p>
+                    <h3>Timeline</h3>
+                    <li>01/26/2022 Bill introduced</li>
+                    <li>01/27/2022 Senate Read and Referred</li>
+                    
+                </div>
+            </div>
+            <div id='HI_info'> <!-- Inactive -->
+                <p>There are four inactive Bills:
+                    <a href="#IN_1">HB 2051</a>,
+                    <a href="#IN_2">SB 2428</a>,
+                    <a href="#HI_3">SB 2797</a>, and
+                    <a href="#HI_4">HB 2341</a>
+                </p>
+                <div class="anchor" id="HI_1">
+                    <h2><a href="https://www.capitol.hawaii.gov/measure_indiv.aspx?billtype=HB&billnumber=2051&year=2022" target="_blank">Hawaii Consumer Privacy Act</a></h2>
+                    <p>CEstablishes the Hawaii consumer privacy act. Specifies various consumer rights with respect to the collection of personal information by businesses.
+                        Outlines the obligations on businesses with respect to the collection, disclosure, sharing, and selling of consumer personal information. Specifies the
+                        requirements for administration and enforcement by the department, including adoption of rules. Appropriates funds. Effective 1/1/2023.</p>
+                    <p>Proposed by Representatives LoPresti, Quinlan, and Takayama</p>
+                    <p>* Bill requires the Department of Commerce and Consumer Affairs to adopt rules governing opt-out rights for automated decision making and risk assessment obligations.</p>
+                    <h3>Timeline</h3>
+                    <li>01/26/2022 Bill introduced, Passed First Reading</li>
+                    <li>01/28/20 Referred to HET, CPC, JHA</li>
+                    <li>01/31/2022 Bill scheduled to be heard by HET </li>
+                    <li>02/02/2022 The committee(s) on HET recommend(s) that the measure be deferred.</li>
+                    <li>02/02/2022 Re-referred to HET, CPC, FIN</li>
+                </div>
+                <div class="anchor" id="HI_2">
+                    <h2><a href="https://www.capitol.hawaii.gov/measure_indiv.aspx?billtype=SB&billnumber=2428&year=2022" target="_blank">Consumer Data Protection Act</a></h2>
+                    <p>Establishes a framework to regulate controllers and processors with access to personal consumer data. Establishes penalties. Establishes a new consumer
+                        privacy special fund. Appropriates moneys.</p>
+                    <p>Proposed by Senator Misalucha</p>
+                    <h3>Timeline</h3>
+                    <li>01/21/2022 Bill introduced</li>
+                    <li>01/24/2022 Passed First Reading</li>
+                    <li>01/24/2022 Referred to CPN/JDC, WAM</li>
+                </div>
+                <div class="anchor" id="HI_3">
+                    <h2><a href="https://www.capitol.hawaii.gov/measure_indiv.aspx?billtype=SB&billnumber=2797&year=2022" target="_blank">Consumer Data Protection Act</a></h2>
+                    <p>Establishes a framework to regulate controllers and processors with access to personal consumer data. Establishes penalties. Establishes a new consumer
+                        privacy special fund. Appropriates moneys.</p>
+                    <p>Proposed by Representative Lee and Senators Keith-Agaran, Misalucha, Ihara, Kanuha, and San Buenaventura</p>
+                    <h3>Timeline</h3>
+                    <li>01/21/2022 Bill introduced</li>
+                    <li>01/24/2022 Passed First Reading</li>
+                    <li>01/24/2022 Referred to CPN, WAM</li>
+                    <li>01/28/2022 Referred to CPN, WAM/JDC</li>
+                </div>
+                <div class="anchor" id="HI_4">
+                    <h2><a href="https://www.capitol.hawaii.gov/measure_indiv.aspx?billtype=HB&billnumber=2341&year=2022" target="_blank">Consumer Data Protection Act</a></h2>
+                    <p>Establishes a framework to regulate controllers and processors with access to personal consumer data. Establishes penalties. Establishes a new consumer
+                        privacy special fund. Appropriates moneys.</p>
+                    <p>Proposed by Representative Takumi</p>
+                    <h3>Timeline</h3>
+                    <li>01/26/2022 Bill introduced, Passed First Reading</li>
+                    <li>01/28/2022 Referred to HET, CPN, FIN</li>
+                </div>
+            </div>
+            <div id='IN_info'> <!-- Inactive -->
+                <p>There are two inactive Bills:
+                    <a href="#IN_1">HB 1261</a> and
+                    <a href="#IN_2">SB 358</a>
+                </p>
+                <div class="anchor" id="IN_1">
+                    <h2><a href="http://iga.in.gov/legislative/2022/bills/house/1261#document-1e812990" target="_blank">House Bill 1261</a></h2>
+                    <p>Consumer privacy. Requires businesses to disclose certain
+                        information to consumers. Outlines different requests a consumer may
+                        make with businesses regarding the consumer's personal information.
+                        Assigns enforcement of consumer privacy law to the Indiana division
+                        of consumer protection. Exempts certain government entities and
+                        certain types of information. Provides certain business exceptions. </p>
+                    <p>Proposed by Representative Hamilton</p>
+                    <h3>Timeline</h3>
+                    <li>01/10/2022 Bill introduced</li>
+                    <li>01/10/2022 First Reading, referred to Committee on Commerce, Small Business and Economic Development</li>
+                </div>
+                <div class="anchor" id="IN_2">
+                    <h2><a href="http://iga.in.gov/legislative/2022/bills/senate/358/" target="_blank">Senate Bill 358</a></h2>
+                    <p>Consumer data protection. Establishes a new article in the Indiana Code concerning consumer data protection,
+                        to take effect January 1, 2025. Sets forth the following within the new article: (1) Definitions of various
+                        terms that apply throughout the article. (2) Exemptions from the bill's requirements concerning the
+                        responsibilities of controllers of consumers' personal data. (3) The rights of an Indiana consumer to do the
+                        following: (A) Confirm whether or not a controller is processing the consumer's personal data. (B) Correct 
+                        inaccuracies in the consumer's personal data that the consumer previously provided to a controller. (C) 
+                        Delete the consumer's personal data held by a controller. (D) Obtain a copy or representative summary of the
+                        consumer's personal data that the consumer previously provided to the controller. (E) Opt out of the processing
+                        of the consumer's personal data for certain purposes. (4) The responsibilities of controllers of consumers'
+                        personal data. (5) The roles of controllers and processors with respect to a consumer's personal data. (6)
+                        Requirements for data protection assessments by controllers of consumers' personal data. (7) Requirements for
+                        processing de-identified data or pseudonymous data. (8) Limitations as to the scope of the new article. (9)
+                        The authority of the attorney general to investigate and enforce suspected or actual violations of the new
+                        article. (10) The preemption of local rules, regulation, and laws regarding the processing of personal data.</p>
+                    <p>Proposed by Senators Brown</p>
+                    <h3>Timeline</h3>
+                    <li>01/12/2022 Bill introduced</li>
+                    <li>01/12/2022 First Reading, referred to Committee on Commerce and Technology</li>
+                    <li>01/27/2022 Committee report: amend do pass, adopted</li>
+                    <li>01/31/2022 Second Reading: amended, ordered, engrossed</li>
+                    <li>01/31/2022 Amendment #2 prevailed</li>
+                    <li>02/01/2022 Third reading: passed: 49 yeas, 0 nays</li>
+                    <li>02/02/2022 Referred to the House</li>
+                    <li>02/07/2022 First reading: referred to Committee on Commerce, Small Business and Economic Development</li>
+                    <li>02/17/2022 Committee report: amend do pass, adopted</li>
+                </div>
+            </div>
+            <div id='IA_info'> <!-- Inactive -->
+                <p>There are two inactive bills:
+                    <a href="#IA_1">HF 2506</a> and
+                    <a href="#IA_2">SF 2208</a>
+                </p>
+                <div class="anchor" id="IA_1">
+                    <h2><a href="https://www.legis.iowa.gov/legislation/BillBook?ba=HF%202506&ga=89" target="_blank">HF 2506</a></h2>
+                    <p>An Act relating to consumer data protection, providing civil penalties, and
+                        including effective date provisions.</p>
+                    <h3>Timeline</h3>
+                    <li>02/23/2022 Bill introduced</li>
+                    <li>02/23/2022 Referred to committee on Information Technology</li>
+                    <li>03/08/2022 First Amendment filed</li>
+                    <li>03/09/2022 Second Amendment filed</li>
+                    <li>03/14/2022 First and Second Amendments withdrawn, Second Amendment adopted</li>
+                    <li>03/14/2022 Bill Passed House, yeas 91, nays 2</li>
+                    <li>03/15/2022 First Reading, referred to Judiciary</li>
+                    <li>03/15/2022 In subcommittee</li>
+                </div>
+                <div class="anchor" id="IA_2">
+                    <h2><a href="https://www.legis.iowa.gov/legislation/BillBook?ga=89&ba=SF2208" target="_blank">SF 2208</a></h2>
+                    <p>An Act relating to consumer data protection, making penalties applicable,
+                        and including effective date provisions.</p>
+                    <h3>Timeline</h3>
+                    <li>02/08/2022 Bill introduced, referred to Commerce</li>
+                    <li>02/09/2022 In subcommittee</li>
+                </div>
+            </div>
+            <div id='KY_info'> <!-- In Committee -->
+                <p>There are two bills in committee:
+                    <a href="#KY_1">SB 15</a> and
+                    <a href="#KY_2">HB 586</a>
+                </p>
+                <div class="anchor" id="KY_1">
+                    <h2><a href="https://apps.legislature.ky.gov/record/22rs/sb15.html" target="_blank">Senate Bill 15</a></h2>
+                    <p>Create new sections of KRS Chapter 367 to establish consumer rights relating to personal data, including the
+                        rights to confirm whether data is being processed, to delete personal data provided by the consumer, to obtain
+                        a copy of the consumer's personal data that was previously provided, and to opt out of targeted advertising and
+                        the sale of data; create definitions for terms; require that persons controlling data establish an appeal process
+                        by which a consumer may appeal the controller's refusal to take action with respect to a request to exercise a right
+                        set forth in this Act; set forth the types of data and the persons or entities to which the provisions of the Act
+                        apply and do not apply; set forth requirements for persons or entities that control and process consumer data;
+                        require persons who control data to conduct data protection impact assessments; establish that the Attorney General
+                        has exclusive authority to enforce, with the exception of a private right of action by which consumers can seek injunctive
+                        relief for specific violations; create a consumer privacy fund in the state treasury to be administered by the State
+                        Treasurer; amend KRS 367.240 to conform; EFFECTIVE January 1, 2024.</p>
+                    <p>Proposed by Senators Westerfield, Alvarado, and Schickel</p>
+                    <h3>Timeline</h3>
+                    <li>01/13/2022 Bill introduced in Senate to Committee on Committees</li>
+                    <li>01/18/2022 Referred to Economic Development, Tourism & Labor</li>
+                </div>
+                <div class="anchor" id="KY_2">
+                    <h2><a href="https://apps.legislature.ky.gov/record/22RS/hb586.html" target="_blank">House Bill 586</a></h2>
+                    <p>Create new sections of KRS Chapter 367 to establish consumer rights relating to personal data, including the
+                        rights to confirm whether data is being processed, to delete personal data provided by the consumer, to obtain
+                        a copy of the consumer's personal data that was previously provided, and to opt out of targeted advertising and
+                        the sale of data; create definitions for terms; require that persons controlling data establish an appeal process
+                        by which a consumer may appeal the controller's refusal to take action with respect to a request to exercise a right
+                        set forth in this Act; set forth the types of data and the persons or entities to which the provisions of the Act
+                        apply and do not apply; set forth requirements for persons or entities that control and process consumer data;
+                        require persons who control data to conduct data protection impact assessments; establish that the Attorney General
+                        has exclusive authority to enforce, with the exception of a private right of action by which consumers can seek injunctive
+                        relief for specific violations; create a consumer privacy fund in the state treasury to be administered by the State
+                        Treasurer; amend KRS 367.240 to conform; EFFECTIVE January 1, 2024.</p>
+                    <p>Proposed by Representatives Pratt and Decker</p>
+                    <h3>Timeline</h3>
+                    <li>02/24/2022 Bill introduced in House to Committee on Committees</li>
+                </div>
+            </div>
+            <div id='LA_info'> <!-- In Committee -->
+                <p>There is one bill in committee:
+                    <a href="#LA_1">HB 987</a>
+                </p>
+                <div class="anchor" id="LA_1">
+                    <h2><a href="https://www.legis.la.gov/legis/BillInfo.aspx?s=22RS&b=HB987&sbi=y" target="_blank">Louisiana Consumer Privacy Act</a></h2>
+                    <p>An Act to enact Chapter 12-B of Title 51 of the Louisiana Revised Statutes of 1950, to be comprised of R.S. 51:1381 through 1396, relative
+                        to data privacy; to provide definitions; to provide for applicability; to provide for consumer rights; to require a response to a request;
+                        to provide for the responsibilities of a processor and a controller; to provide for deidentified data; to provide limitations; to provide
+                        for investigative powers; to provide for enforcement; to provide for a civil fine; to create an account; to require a report; and to provide
+                        for related matters.</p>
+                    <p>Proposed by Representative Deshotel</p>
+                    <h3>Timeline</h3>
+                    <li>04/05/2022 Bill introduced</li>
+                    <li>04/06/2022 Referred to the Committee on Commerce</li>
+                </div>
+            </div>
+            <div id='ME_info'> <!-- Inactive -->
+                <p>There is one inactive bill:
+                    <a href="#ME_1">LD 1982</a>
+                </p>
+                <div class="anchor" id="ME_1">
+                    <h2><a href="https://legislature.maine.gov/LawMakerWeb/summary.asp?ID=280082811" target="_blank">Maine Consumer Privacy Act</a></h2>
+                    <p>An Act To Protect Consumers' Privacy by Giving Them Greater Control of Their Data and To Establish
+                        Consumer Protections Regarding Small Dollar Loans</p>
+                    <p>Proposed by Senator Rafferty; cosponsored by Senators Curry and Daughtry and by Represenatives Roberts and Talbot Ross</p>
+                    <h3>Timeline</h3>
+                    <li>02/16/2022 Bill introduced</li>
+                    <li>02/16/2022 Referred to Committee on Innovation, Development, Economic Advancement and Business</li>
+                    <li>03/09/2022 First Reading</li>
+                    <li>02/01/2021 Bill referred to Committee on Health Coverage, Insurance and Financial Services</li>
+                    <li>03/22/2022 Pursuant to Joint Rule 310.3 Placed in Legislative Files (DEAD)</li>
+                </div>
+            </div>
+            <div id='MD_info'> <!-- In Cross Committee -->
+                <p>There is one bill in cross committee:
+                    <a href="#MD_1">SB 11</a>
+                </p>
+                <div class="anchor" id="MD_1">
+                    <h2><a href="https://mgaleg.maryland.gov/mgawebsite/Legislation/Details/sb0011?ys=2022RS" target="_blank">Senate Bill 11</a></h2>
+                    <p>An Act establishing the Workgroup on Online Consumer Personal Information Privacy to review current practices of business entities relating
+                        to the collection, use, storage, disclosure, analysis, deletion, and modification of online personal information of consumers in the State;
+                        and requiring the Workgroup to report its findings and recommendations, including any recommended legislation, to the Governor and certain
+                        committees of the General Assembly by December 1, 2022.</p>
+                    <p>Proposed by Senator Lee</p>
+                    <h3>Timeline</h3>
+                    <li>10/15/2021 Bill introduced</li>
+                    <li>01/12/2022 First Reading</li>
+                    <li>03/15/2022 Favorable with Amendments Report by Finance; Adopted</li>
+                    <li>03/15/2022 Second Reading Passed with Amendments</li>
+                    <li>03/17/2022 Third Reading Passed</li>
+                    <li>03/22/2022 Referred Economic Matters</li>
+                    <li>04/08/2022 Unfavorable Report by Economic Matters</li>
+                </div>
+            </div>
+            <div id='MA_info'> <!-- Inactive & In Committee -->
+                <p>There are two bills in committee:
+                    <a href="#MA_1">S 2687</a> and
+                    <a href="#MA_2">H 4514</a>; and three inactive bills:
+                    <a href="#MA_3">S 46</a>,
+                    <a href="#MA_4">H 142</a>, and
+                    <a href="#MA_5">H 136</a>
+                </p>
+                <div class="anchor" id="MA_1">
+                    <h2><a href="https://malegislature.gov/Bills/192/S2687" target="_blank">Massachusetts Information Privacy and Security Act</a></h2>
+                    <p>An Act establishing the Massachusetts Information Privacy and Security Act</p>
+                    <p>Proposed by Representatives Creem, Rogers, Vargas, Lesser, Kearney, Lipper-Garabedian, LeBoeuf, Sabadosa,
+                        Fernandes, Jones, Malia, Robertson, and Giannino
+                    </p>
+                    <h3>Timeline</h3>
+                    <li>02/14/2022 Reported from the committee on Advanced Information Technology, the Internet and Cybersecurity</li>
+                    <li>02/14/2022 Bill reported favorably by committee and referred to the committee on Senate Ways and Means</li>
+                </div>
+                <div class="anchor" id="MA_2">
+                    <h2><a href="https://malegislature.gov/Bills/192/H4514" target="_blank">Massachusetts Information Privacy and Security Act</a></h2>
+                    <p>An Act establishing the Massachusetts Information Privacy and Security Act</p>
+                    <p>Proposed by Representatives Rogers, Vargas, McMurtry, Ciccolo, Garballey, Sabadosa, Fernandes, Jones, Malia, Elugardo, Vitolo,
+                        Higgins and Gonzalez
+                    </p>
+                    <h3>Timeline</h3>
+                    <li>03/03/2022 Reported from the committee on Advanced Information Technology, the Internet and Cybersecurity</li>
+                    <li>03/03/2022 Reported favorably by committee and referred to the committee on Health Care Financing</li>
+                    <li>03/31/2022 Reporting date extended to Wednesday June 1, 2022, pending concurrence</li>
+                </div>
+                <div class="anchor" id="MA_3">
+                    <h2><a href="https://malegislature.gov/Bills/192/S46" target="_blank">Massachusetts Information Privacy Act</a></h2>
+                    <p>An Act to establish information privacy regarding advanced information technology, the internet and cybersecurity</p>
+                    <p>Proposed by Senators Creem and Lesser</p>
+                    <p>* Bill replaced by the MIPSA (S 2687/H4514)</p>
+                    <h3>Timeline</h3>
+                    <li>03/29/2021 Bill introduced</li>
+                    <li>03/29/2021 Referred to the committee on Advanced Information Technology, the Internet and Cybersecurity</li>
+                    <li>09/30/2021 Hearing scheduled in Virtual Hearing</li>
+                    <li>02/14/2022 Accompanied a new draft, S2687</li>
+                </div>
+                <div class="anchor" id="MA_4">
+                    <h2><a href="https://malegislature.gov/Bills/192/H142" target="_blank">Massachusetts Information Privacy Act</a></h2>
+                    <p>An Act to establish information privacy regarding advanced information technology, the internet and cybersecurity</p>
+                    <p>Proposed by Representatives Vargas, Rogers, Sabadosa, McMurtry, Ciccolo, Garballey, Elugardo, González,
+                        Vitolo, Fernandes, Jones, Malia, and Higgins</p>
+                    <p>* Bill replaced by the MIPSA (S 2687/H4514)</p>
+                    <h3>Timeline</h3>
+                    <li>03/29/2021 Bill introduced</li>
+                    <li>03/29/2021 Referred to the committee on Advanced Information Technology, the Internet and Cybersecurity</li>
+                    <li>09/30/2021 Hearing scheduled in Virtual Hearing</li>
+                    <li>02/14/2022 Accompanied a new draft, see S2687</li>
+                </div>
+                <div class="anchor" id="MA_5">
+                    <h2><a href="https://malegislature.gov/Bills/192/H136" target="_blank">H 136</a></h2>
+                    <p>An Act to establish information privacy regarding advanced information technology, the internet and cybersecurity</p>
+                    <p>Proposed by Representatives Rogers, Vargas, Kearney, Lipper-Garabedian, LeBoeuf, Sabadosa,
+                        Fernandes, Jones, Malia, Robertson, and Giannino</p>
+                    <p>* Bill replaced by the MIPSA (S 2687/H4514)</p>
+                    <h3>Timeline</h3>
+                    <li>03/29/2021 Bill introduced</li>
+                    <li>03/29/2021 Referred to the committee on Advanced Information Technology, the Internet and Cybersecurity</li>
+                    <li>09/30/2021 Hearing scheduled in Virtual Hearing</li>
+                    <li>02/14/2022 Accompanied a new draft, see S2687</li>
+                </div>
+            </div>
+            <div id='MN_info'> <!-- Inactive -->
+                <p>There is one inactive bill:
+                    <a href="#MN_1">HF 1492</a>
+                </p>
+                <div class="anchor" id="MN_1">
+                    <h2><a href="https://www.revisor.mn.gov/bills/bill.php?f=HF1492&y=2021&ssn=0&b=house#actions" target="_blank">Minnesota Consumer Data Privacy Act</a></h2>
+                    <p>Consumers given various rights regarding personal data, data transparency obligations placed on businesses, and enforcement by attorney general provided.</p>
+                    <p>Proposed by Delegates Reed, Kimes, Nestor, Haynes, Worrell, Mallow, Rowan, Riley, Bates, Jennings, and Forsht</p>
+                    <h3>Timeline</h3>
+                    <li>01/31/2022 Bill introduced</li>
+                    <li>01/31/2022 Bill referred to Commerce Finance and Policy committee</li>
+                </div>
+            </div>
+            <div id='MS_info'> <!-- Inactive -->
+                <p>There is one inactive bill:
+                    <a href="#MS_1">SB 2330</a>
+                </p>
+                <div class="anchor" id="MS_1">
+                    <h2><a href="http://billstatus.ls.state.ms.us/2022/pdf/history/SB/SB2330.xml" target="_blank">Mississippi Consumer Data Privacy Act</a></h2>
+                    <p>An act to create the "Mississippi Consumer Data Privacy Act"; to authorize consumers to request that businesses disclose certain information; 
+                        to authorize consumers to request that businesses delete personal information collected by businesses; to require businesses to disclose certain
+                        information to consumers, to inform consumers of their right to request that personal information be deleted, and to delete personal information
+                        collected about consumers upon request; to authorize consumers to instruct businesses to not sell the consumers' personal information; to
+                        authorize consumers to bring civil actions against businesses that violate this act; to authorize the attorney general to bring civil actions
+                        against businesses that violate this act; to require the attorney general to adopt regulations to further the purposes of this act; and for related purposes.</p>
+                    <p>Proposed by Senator Turner-Ford</p>
+                    <h3>Timeline</h3>
+                    <li>01/17/2022 Bill introduced</li>
+                    <li>01/17/2022 Bill referred to Judiciary committee</li>
+                    <li>02/01/2022 Bill died in committee</li>
+                </div>
+            </div>
+            <div id='NE_info'> <!-- In Committee -->
+                <p>There is one bill in committee:
+                    <a href="#NE_1">LB 1188</a>
+                </p>
+                <div class="anchor" id="NE_1">
+                    <h2><a href="https://nebraskalegislature.gov/bills/view_bill.php?DocumentID=47317" target="_blank">Uniform Personal Data Protection Act</a></h2>
+                    <p>ELegislative Bill 1188 would adopt the Uniform Personal Data Protection Act as approved by the Uniform Law Commission.</p>
+                    <p>Proposed by Senator Flood</p>
+                    <p>* Bill is based on the Uniform Law Commission’s model privacy bill, the UPDPA. This model bill
+                        does not require consent for processing that “is consistent with the ordinary expectations of data subjects or is likely to benefit data subjects
+                        substantially;” consent is required for processing that is an “incompatible data practice,” and certain types of processing are prohibited.</p>
+                    <h3>Timeline</h3>
+                    <li>01/20/2022 Bill introduced</li>
+                    <li>01/24/2022 Referred to Banking, Commerce, and Insurance Committee</li>
+                    <li>01/26/2022 Notice of hearing</li>
+                </div>
+            </div>
+            <div id='NJ_info'> <!-- In Committee -->
+                <p>There are three bills in committee:
+                    <a href="#NJ_1">A 505</a>,
+                    <a href="#NJ_2">S 332</a>, and
+                    <a href="#NJ_3">A 1971</a>
+                </p>
+                <div class="anchor" id="NJ_1">
+                    <h2><a href="https://www.njleg.state.nj.us/bill-search/2022/A505" target="_blank">New Jersey Disclosure and Accountability Transparency Act</a></h2>
+                    <p>Establishes certain requirements for disclosure and processing of personally identifiable information; establishes
+                        Office of Data Protection and Responsible Use in Division of Consumer Affairs</p>
+                    <p>Proposed by Assemblyman Benson</p>
+                    <h3>Timeline</h3>
+                    <li>01/11/2022 Bill introduced, Referred to Assembly Science, Innovation and Technology Committee</li>
+                </div>
+                <div class="anchor" id="NJ_2">
+                    <h2><a href="https://www.njleg.state.nj.us/bill-search/2022/S332" target="_blank">S 332</a></h2>
+                    <p>Requires commercial Internet websites and online services to notify consumers of collection and
+                        disclosure of personally identifiable information and allows consumers to opt out.</p>
+                    <p>Proposed by Senators Singleton and Codey</p>
+                    <p>* Bill is limited to commercial Internet websites and online services only</p>
+                    <h3>Timeline</h3>
+                    <li>01/11/2022 Bill introduced in the Senate, Referred to Senate Commerce Committee</li>
+                </div>
+                <div class="anchor" id="NJ_3">
+                    <h2><a href="https://www.njleg.state.nj.us/bill-search/2022/A1971" target="_blank">A 1971</a></h2>
+                    <p>Requires commercial Internet websites and online services to notify consumers of collection and
+                        disclosure of personally identifiable information and allows consumers to opt out.</p>
+                    <p>Proposed by Assemblymen Mukherji, Benson, and Moriarty; cosponsored by Assemblypeople McKnight, DeAngelo, and Verrelli</p>
+                    <p>* Bill is limited to commercial Internet websites and online services only</p>
+                    <h3>Timeline</h3>
+                    <li>01/11/2022 Bill introduced, Referred to Assembly Science, Innovation and Technology Committee</li>
+                </div>
+            </div>
+            <div id='NY_info'> <!-- In Committee -->
+                <p>There are five bills in committee:
+                    <a href="#NY_1">A 680B</a>,
+                    <a href="#NY_2">S 6701A</a>,
+                    <a href="#NY_3">A 6042</a>,
+                    <a href="#NY_4">S 567</a>, and
+                    <a href="#NY_5">A 3709</a>
+                </p>
+                <div class="anchor" id="NY_1">
+                    <h2><a href="https://www.nysenate.gov/legislation/bills/2021/a680/amendment/b" target="_blank">New York Privacy Act</a></h2>
+                    <p>Enacts the NY privacy act to require companies to disclose their methods of de-identifying personal information, to place special
+                        safeguards around data sharing and to allow consumers to obtain the names of all entities with whom their information is shared.</p>
+                    <p>Proposed by Representative Rosenthal</p>
+                    <h3>Timeline</h3>
+                    <li>01/06/2021 Bill introduced, Referred To Consumer Affairs And Protection</li>
+                    <li>05/27/2021 Amend And Recommit To Consumer Affairs And Protection</li>
+                    <li>05/27/2021 First Amendment printed 680a</li>
+                    <li>01/05/2022 Referred To Consumer Affairs And Protection</li>
+                    <li>01/07/2022 Amend And Recommit To Consumer Affairs And Protection</li>
+                    <li>02/07/2022 Second Amendment printed 680b</li>
+                </div>
+                <div class="anchor" id="NY_2">
+                    <h2><a href="https://www.nysenate.gov/legislation/bills/2021/s6701/amendment/original" target="_blank">New York Privacy Act</a></h2>
+                    <p>Enacts the NY privacy act to require companies to disclose their methods of de-identifying personal information, to place special
+                        safeguards around data sharing and to allow consumers to obtain the names of all entities with whom their information is shared.</p>
+                    <p>Proposed by Senators Thomas and May</p>
+                    <h3>Timeline</h3>
+                    <li>05/12/2021 Bill introduced, Referred To Consumer Protection</li>
+                    <li>05/18/2021 First Reading</li>
+                    <li>05/20/2021 Second Reading</li>
+                    <li>05/24/2021 Third Reading</li>
+                    <li>06/10/2021 Committed to Rules</li>
+                    <li>01/05/2022 Referred to Consumer Protection</li>
+                    <li>01/06/2022 Amend and recommit to Consumer Protection</li>
+                    <li>01/06/2022 First Amendment printed 6701a</li>
+                    <li>02/08/2022 Reported and committed to Internet and Technology</li>
+                </div>
+                <div class="anchor" id="NY_3">
+                    <h2><a href="https://www.nysenate.gov/legislation/bills/2021/A6042" target="_blank">Digital Fairness Act</a></h2>
+                    <p>An Act to amend the general business law, the executive law, the state finance law and the education law, in
+                        relation to enacting the "digital fairness act"</p>
+                    <p>Proposed by Assemblywoman Cruz</p>
+                    <h3>Timeline</h3>
+                    <li>03/05/2021 Bill introduced, Referred To Consumer Affairs And Protection</li>
+                    <li>01/05/2022 Referred To Consumer Affairs And Protection</li>
+                </div>
+                <div class="anchor" id="NY_4">
+                    <h2><a href="https://www.nysenate.gov/legislation/bills/2021/S567" target="_blank">S 567</a></h2>
+                    <p>Grants a consumer a right to request a business to disclose the categories and specific pieces of
+                        personal information that it collects about the consumer, the categories of sources from which
+                        that information is collected, the business purposes for collecting or selling the information,
+                        and the categories of third parties with which the information is shared.</p>
+                    <p>Proposed by Senator Hoylman</p>
+                    <h3>Timeline</h3>
+                    <li>01/06/2021 Bill introduced, Referred To Consumer Protection</li>
+                    <li>01/05/2022 Referred To Consumer Protection</li>
+                </div>
+                <div class="anchor" id="NY_5">
+                    <h2><a href="https://www.nysenate.gov/legislation/bills/2021/A3709" target="_blank">A 3709</a></h2>
+                    <p>Grants a consumer a right to request a business to disclose the categories and specific pieces of
+                        personal information that it collects about the consumer, the categories of sources from which
+                        that information is collected, the business purposes for collecting or selling the information,
+                        and the categories of third parties with which the information is shared.</p>
+                    <p>Proposed by Assemblywoman Gunther</p>
+                    <h3>Timeline</h3>
+                    <li>01/28/2021 Bill introduced, Referred To Consumer Affairs And Protection</li>
+                    <li>01/05/2022 Referred To Consumer Affairs And Protection</li>
+                </div>
+            </div>
+            <div id='NC_info'> <!-- In Committee -->
+                <p>There is one bill in committee:
+                    <a href="#NC_1">S 569</a>
+                </p>
+                <div class="anchor" id="NC_1">
+                    <h2><a href="https://www.ncleg.gov/BillLookUp/2021/S569" target="_blank">Consumer Privacy Act</a></h2>
+                    <p>An Act to protect consumers by enhancing the Consumer Privacy Act of North Carolina</p>
+                    <p>Proposed by Senators Salvador, Clark, Waddell, and Murdock</p>
+                    <h3>Timeline</h3>
+                    <li>04/06/2021 Bill introduced</li>
+                    <li>04/07/2021 First Reading; Passed</li>
+                    <li>04/07/2021 Referred to Committee on Rules and Operations of the Senate</li>
+                </div>
+            </div>
+            <div id='OH_info'> <!-- In Committee -->
+                <p>There is one bill in committee:
+                    <a href="#OH_1">HB 376</a>
+                </p>
+                <div class="anchor" id="OH_1">
+                    <h2><a href="https://www.legislature.ohio.gov/legislation/legislation-summary?id=GA134-HB-376" target="_blank">Ohio Personal Privacy Act</a></h2>
+                    <p>This bill is to amend section 1345.51 and to enact sections 1355.01, 1355.02, 1355.03, 1355.04, 1355.05,
+                        1355.06, 1355.07, 1355.08, 1355.09, 1355.10, and 1355.11 of the Revised Code to enact the Ohio Personal Privacy Act.</p>
+                    <p>Proposed by Representative Carfagna, Hall, Click, Plummer, Schmidt, Lanese, White, Stewart,
+                        Carruthers, and Ginter</p>
+                    <h3>Timeline</h3>
+                    <li>07/12/2021 Bill introduced</li>
+                    <li>09/16/2021 Referred to Government Oversight Committee</li>
+                    <li>02/09/2022 Reported - Substitute</li>
+                    <li>02/16/2022 Informally passed</li>
+                    <li>02/22/2022 Re-referred to Rules and Reference Committee</li>
+                </div>
+            </div>
+            <div id='OK_info'> <!-- Inactive & In Cross Committee -->
+                <p>There is one bill in cross committee:
+                    <a href="#OK_1">HB 2969</a>; and two inactive bills:
+                    <a href="#OK_2">HB 1602</a> and
+                    <a href="#OK_3">HB 3447</a>
+                </p>
+                <div class="anchor" id="OK_1">
+                    <h2><a href="http://www.oklegislature.gov/BillInfo.aspx?Bill=hb2969&Session=2200" target="_blank">Oklahoma Computer Data Privacy Act of 2022</a></h2>
+                    <p>An Act relating to privacy of computer data; enacting the Oklahoma Computer Data Privacy Act of 2022;
+                        providing intent and construction; defining terms; prescribing that the Attorney General is responsible
+                        for enforcement; providing disclosure requirements; providing limitations; providing consumers the right
+                        to opt out of data collection; providing consumers the right to deletion of their information; providing
+                        exceptions to request for deletion of information; providing consumers with the right to request for an
+                        audit of their information; providing consumers with the right to have their personal information
+                        corrected; requiring business to not discriminate; providing guidelines for implementation; providing
+                        exemptions; preempting intermediate transactions from circumventing regulations; providing waivers are void
+                        and unenforceable; prohibiting businesses from modifying or manipulating user interfaces to obscure,
+                        subvert or impair user autonomy, decision-making or choice; providing severability of provisions;
+                        providing for codification; and providing an effective date.</p>
+                    <p>Proposed by Representatives Walke and West (Josh)</p>
+                    <h3>Timeline</h3>
+                    <li>02/07/2022 Bill introduced; First Reading</li>
+                    <li>02/08/2022 Second Reading; Referred to Technology</li>
+                    <li>02/21/2022 CR; Do Pass, amended by committee substitute Technology Committee</li>
+                    <li>03/23/2022 General Order</li>
+                    <li>03/23/2022 Amended by floor substitute</li>
+                    <li>03/23/2022 Third Reading, Measure passed: Ayes: 74 Nays: 15</li>
+                    <li>03/23/2022 Referred for engrossment</li>
+                    <li>03/28/2022 Engrossed, signed, to Senate</li>
+                    <li>03/28/2022 First Reading</li>
+                    <li>03/29/2022 Second Reading referred to Judiciary Committee then to Appropriations Committee</li>
+
+                </div>
+                <div class="anchor" id="OK_2">
+                    <h2><a href="http://www.oklegislature.gov/BillInfo.aspx?Bill=hb1602&Session=2200" target="_blank">Oklahoma Computer Data Privacy Act</a></h2>
+                    <p>The bill allows a customer to request that a business which collects personal information disclose the categories
+                        and specific items of information collected, and to delete the consumer’s personal information
+                        collected by the business. The consumer would be entitled to opt out of the sale of their personal
+                        information by the business to third parties. A business would be prohibited to collect a
+                        consumer’s personal information prior to notifying the consumer of each category of information
+                        to be collected, and the purposes for which it will be used, and must obtain the consumer’s
+                        consent. The bill prohibits a business from discriminating against a consumer who exercises a
+                        right included in the act.</p>
+                    <p>Proposed by Representatives Walke and West (Josh); cosponsored by Senator Montgomery</p>
+                    <h3>Timeline</h3>
+                    <li>02/01/2021 Bill introduced</li>
+                    <li>02/02/2021 Bill referred to Technology committee</li>
+                    <li>02/10/2021 Bill passed by Technology committee</li>
+                    <li>03/04/2021 Bill amended by floor substitute</li>
+                    <li>03/04/2021 Third Reading, Measure passed: Ayes: 85 Nays: 11</li>
+                    <li>03/04/2021 Referred for engrossment</li>
+                    <li>03/08/2021 Engrossed, signed, to Senate</li>
+                    <li>03/08/2021 First Senate reading</li>
+                    <li>03/22/2021 Second Reading referred to Judiciary committee</li>
+                </div>
+                <div class="anchor" id="OK_3">
+                    <h2><a href="http://www.oklegislature.gov/BillInfo.aspx?Bill=hb3447&Session=2200" target="_blank">Uniform Personal Data Protection Act</a></h2>
+                    <p>Bill is based on the Uniform Law Commission’s model privacy bill, the UPDPA. This model bill
+                        does not require consent for processing that “is consistent with the ordinary expectations of data subjects or is likely to benefit data subjects
+                        substantially;” consent is required for processing that is an “incompatible data practice,” and certain types of processing are prohibited.</p>
+                    <p>Proposed by Representative O'Donnell</p>
+                    <h3>Timeline</h3>
+                    <li>02/07/2022 Bill introduced</li>
+                    <li>02/07/2022 First Reading</li>
+                    <li>02/08/2022 Second Reading referred to Rules committee</li>
+                </div>
+            </div>
+            <div id='PA_info'> <!-- In Committee -->
+                <p>There are three bills in committee:
+                    <a href="#PA_1">HB 1126</a>,
+                    <a href="#PA_2">HB 2202</a>, and
+                    <a href="#PA_3">HB 2257</a>,
+                </p>
+                <div class="anchor" id="PA_1">
+                    <h2><a href="https://www.legis.state.pa.us/cfdocs/billinfo/bill_history.cfm?syear=2021&sind=0&body=H&type=B&bn=1126" target="_blank">HB 1126</a></h2>
+                    <p>An Act providing for consumer data privacy, for rights of consumers and duties of businesses
+                        relating to the collection of personal information and for duties of the Attorney General.</p>
+                    <p>Proposed by Representative Neilson</p>
+                    <h3>Timeline</h3>
+                    <li>04/07/2022 Bill introduced, Referred to Consumer Affairs</li>
+                </div>
+                <div class="anchor" id="PA_2">
+                    <h2><a href="https://www.legis.state.pa.us/cfdocs/billInfo/bill_history.cfm?syear=2021&sind=0&body=H&type=B&bn=2202" target="_blank">Consumer Data Privacy Act</a></h2>
+                    <p>An Act providing for consumer data privacy, for rights of consumers and duties of businesses relating to the collection of personal information and for duties of the Attorney General.</p>
+                    <p>Proposed by Representative Mercuri</p>
+                    <h3>Timeline</h3>
+                    <li>12/13/2021 Bill introduced, referred to Consumer Affairs</li>
+                </div>
+                <div class="anchor" id="PA_3">
+                    <h2><a href="https://www.legis.state.pa.us/cfdocs/billinfo/bill_history.cfm?syear=2021&sind=0&body=H&type=B&bn=2257" target="_blank">Consumer Data Protection Act</a></h2>
+                    <p>An Act providing for protection of certain personal data of consumers; imposing duties on controllers and processors of personal data of consumers; providing for
+                        enforcement; prescribing penalties; and establishing the Consumer Privacy Fund.</p>
+                    <p>Proposed by Representative Kenyatta</p>
+                    <h3>Timeline</h3>
+                    <li>01/20/2022 Bill introduced, referred to Consumer Affairs</li>
+                </div>
+            </div>
+            <div id='RI_info'> <!-- In Committee -->
+                <p>There is one bill in committee:
+                    <a href="#RI_1">H 7917</a>
+                </p>
+                <div class="anchor" id="RI_1">
+                    <h2><a href="https://legiscan.com/RI/bill/H7917/2022" target="_blank">Rhode Island Information Privacy Act</a></h2>
+                    <p>This bill allows an individual to access and learn what personal information about the individual has been gathered and stored by covered entities that conduct business in Rhode Island.</p>
+                    <p>Proposed by Representative McNamara</p>
+                    <h3>Timeline</h3>
+                    <li>03/07/2022 Bill introduced, referred to House Finance</li>
+                    <li>03/10/2022 Committee transferred to House State Government & Elections</li>
+                    <li>03/25/2022 Scheduled for hearing and/or consideration (03/31/2022)</li>
+                    <li>03/31/2022 Committee recommended measure be held for further study</li>
+                </div>
+            </div>
+            <div id='UT_info'> <!-- Signed -->
+                <p>There is one signed bill:
+                    <a href="#UT_1">SB 227</a>
+                </p>
+                <div class="anchor" id="UT_1">
+                    <h2><a href="https://le.utah.gov/~2022/bills/static/SB0227.html" target="_blank">Utah Consumer Privacy Act</a></h2>
+                    <p><em>Effective Dec 13. 2023</em></p>
+                    <p>An Act that defines terms; provides consumers the right to: access and delete certain personal data maintained by
+                        certain businesses; and opt out of the collection and use of personal data for certain purposes; requires certain
+                        businesses that control and process consumers' personal data to: safeguard consumers' personal data; provide clear
+                        information to consumers regarding how the consumers' personal data are used; and accept and comply with a consumer's
+                        request to exercise the consumer's rights under this bill; creates a right for a consumer to know what personal data
+                        a business collects, how the business uses the personal data, and whether the business sells the personal data; upon
+                        request and subject to exceptions, requires a business to delete a consumer's personal data or stop selling the
+                        consumer's personal data; allows the Division of Consumer Protection to accept and investigate consumer complaints
+                        regarding the processing of personal data; authorizes the Office of the Attorney General to take enforcement action and
+                        impose penalties; and makes technical changes.</p>
+                    <p>Proposed by Senators Cullimore and Brammer</p>
+                    <h3>Timeline</h3>
+                    <li>02/17/2022 Bill introduced, First Senate Reading</li>
+                    <li>02/18/2022 Referred to Senate Revenue and Taxation Committee</li>
+                    <li>02/24/2022 Second Senate Reading; Passed</li>
+                    <li>02/25/2022 Third Senate Reading; Passed</li>
+                    <li>02/25/2022 Senate to House</li>
+                    <li>02/28/2022 First House Reading</li>
+                    <li>02/28/2022 Referred to House Transportation Committee</li>
+                    <li>03/01/2022 Amendment Recommendation #1</li>
+                    <li>03/01/2022 Referred to House Rules Committee</li>
+                    <li>03/01/2022 Second House Reading</li>
+                    <li>03/02/2022 Third House Reading; Passed</li>
+                    <li>03/03/2022 Signed by Senate Speaker and Senate President</li>
+                    <li>03/15/2022 Sent to Governor</li>
+                    <li>03/24/2022 Signed by Governor</li>
+
+                </div>
+            </div>
+            <div id='VT_info'> <!-- In Committee -->
+                <p>There are two bills in committee:
+                    <a href="#VT_1">H 160</a> and
+                    <a href="#VT_2">H 570</a>
+                </p>
+                <div class="anchor" id="VT_1">
+                    <h2><a href="https://legislature.vermont.gov/bill/status/2022/H.160" target="_blank">H 160</a></h2>
+                    <p>This bill proposes to adopt consumer privacy protections, give Vermonters more control over the amount
+                        and type of data that personal device manufacturers and service providers collect about them, and adopt
+                        other protections provided in the California Consumer Privacy Act. </p>
+                    <p>Proposed by Representatives Townsend and Briglin</p>
+                    <h3>Timeline</h3>
+                    <li>01/29/2021 First Reading; Referred to the Committee on Commerce and Economic Development</li>
+                </div>
+                <div class="anchor" id="VT_2">
+                    <h2><a href="https://legislature.vermont.gov/bill/status/2022/H.570" target="_blank">H 570</a></h2>
+                    <p>This bill proposes to enhance data privacy protections for consumers.</p>
+                    <p>Proposed by Representatives Marcotte and Kimbell</p>
+                    <h3>Timeline</h3>
+                    <li>01/11/2022 First Reading; Referred to the Committee on Commerce and Economic Development</li>
+                </div>
+            </div>
+            <div id='VA_info'> <!-- Signed -->
+                <p>There is one signed bill:
+                    <a href="#VA_1">SB 1392</a>
+                </p>
+                <div class="anchor" id="VA_1">
+                    <h2><a href="https://le.utah.gov/~2022/bills/static/SB0227.html" target="_blank">Virgina Consumer Data Protection Act</a></h2>
+                    <p><em>Effective Jan. 1, 2023</em></p>
+                    <p>Establishes a framework for controlling and processing personal data in the Commonwealth. The bill applies to all persons that
+                        conduct business in the Commonwealth and either (i) control or process personal data of at least 100,000 consumers or (ii)
+                        derive over 50 percent of gross revenue from the sale of personal data and control or process personal data of at least 25,000
+                        consumers. The bill outlines responsibilities and privacy protection standards for data controllers and processors. The bill does
+                        not apply to state or local governmental entities and contains exceptions for certain types of data and information governed by
+                        federal law. The bill grants consumer rights to access, correct, delete, obtain a copy of personal data, and to opt out of the
+                        processing of personal data for the purposes of targeted advertising. The bill provides that the Attorney General has exclusive
+                        authority to enforce violations of the law, and the Consumer Privacy Fund is created to support this effort. </p>
+                    <p>Proposed by Senators  Marsden, Boysko, and Dunnavant</p>
+                    <h3>Timeline</h3>
+                    <li>01/13/2021 Bill introduced, Referred to Committee on General Laws and Technology</li>
+                    <li>01/27/2021 Rereferred to Finance and Appropriations</li>
+                    <li>02/04/2021 Second Reading</li>
+                    <li>02/04/2021 Engrossed by Senate - committee substitute with amendments SB1392ES1</li>
+                    <li>02/05/2021 Read third time and passed Senate (36-Y 0-N 1-A)</li>
+                    <li>02/07/2021 House First Reading</li>
+                    <li>02/07/2021 Referred to Committee on Communications, Technology and Innovation</li>
+                    <li>02/17/2021 Second Reading</li>
+                    <li>02/18/2021 Third Reading</li>
+                    <li>02/24/2021 Bill text as passed Senate and House</li>
+                    <li>02/24/2021 Signed by Senate Speaker and Senate President</li>
+                    <li>02/26/2021 Enrolled Bill Communicated to Governor</li>
+                    <li>03/02/2021 Approved by Governor</li>
+                </div>
+            </div>
+            <div id='WA_info'> <!-- Inactive -->
+                <p>There are four inactive bills:
+                    <a href="#WA_1">HB 1433</a>,
+                    <a href="#WA_2">SB 5062</a>,
+                    <a href="#WA_3">HB 1850</a>, and
+                    <a href="#WA_4">SB 5813</a>
+                </p>
+                <div class="anchor" id="WA_1">
+                    <h2><a href="https://app.leg.wa.gov/billsummary?BillNumber=1433&Year=2021&Initiative=false" target="_blank">People's Privacy Act</a></h2>
+                    <p>An Act Relating to creating a charter of people's personal data
+                        rights; adding a new chapter to Title 19 RCW; and prescribing
+                        penalties.</p>
+                    <p>Proposed by Representatives Kloba, Sutherland, Ryu, J. Johnson, Valdez, Dolan,
+                        Young, Ramel, Bergquist, Eslick, Jacobsen, and Harris-Talley</p>
+                    <h3>Timeline</h3>
+                    <li>02/01/2021 Bill introduced</li>
+                    <li>02/01/2021 First Reading</li>
+                    <li>02/01/2021 Bill referred to Civil Rights & Judiciary</li>
+                    <li>01/10/2022 By resolution, reintroduced and retained in present status</li>
+                </div>
+                <div class="anchor" id="WA_2">
+                    <h2><a href="https://app.leg.wa.gov/billsummary?BillNumber=5062&Year=2021&Initiative=False" target="_blank">Washington Privacy Act</a></h2>
+                    <p>An Act Relating to the management, oversight, and use of data;
+                        adding a new section to chapter 42.56 RCW; adding new chapters to
+                        Title 19 RCW; adding a new chapter to Title 43 RCW; creating new
+                        ections; prescribing penalties; providing an effective date;
+                        providing an expiration date; and declaring an emergency.</p>
+                    <p>Proposed by  Senators Carlyle, Nguyen, Billig, Darneille, Das, Dhingra, Holy,
+                        Hunt, Lovelett, Mullet, Pedersen, Salomon, Sheldon, Wellman, and Wilson, C.
+                    </p>
+                    <h3>Timeline</h3>
+                    <li>01/05/2021 Bill introduced</li>
+                    <li>01/11/2021 First Reading, Bill referred to Environment, Energy & Technology</li>
+                    <li>01/14/2021 Public hearing in the Senate Committee on Environment, Energy & Technology</li>
+                    <li>01/21/2021 Executive action taken - Majority; 1st substitute bill be substituted, do pass</li>
+                    <li>01/22/2021 Bill referred to Ways & Means</li>
+                    <li>02/08/2021 Public hearing in the Senate Committee on Ways & Means</li>
+                    <li>02/15/2021 Executive action taken - Majority; 2nd substitute bill be substituted, do pass. </li>
+                    <li>02/17/2021 Bill referred to Rules for second reading</li>
+                    <li>02/23/2021 Second Reading by Rules Committee</li>
+                    <li>03/03/2021 2nd substitute bill substituted, Third Reading passed</li>
+                    <li>03/05/2021 First reading, referred to Civil Rights & Judiciary</li>
+                    <li>03/17/2021 Public hearing in the House Committee on Civil Rights & Judiciary</li>
+                    <li>03/26/2021 Executive action taken - Majority; do pass with amendment(s)</li>
+                    <li>04/01/2021 Public hearing and executive action taken in the House Committee - Majority; do pass with amendment(s) by Civil Rights & Judiciary committee</li>
+                    <li>04/02/2021 Referred to Rules 2 Review.</li>
+                    <li>04/08/2021 Rules Committee relieved of further consideration. Placed on second reading.</li>
+                    <li>04/25/2021 By resolution, returned to Senate Rules Committee for third reading.</li>
+                    <li>01/10/2022 By resolution, reintroduced and retained in present status.</li>
+                    <li>02/17/2022 Senate Rules "X" file.</li>
+                    <li>02/24/2022 Moved to Rules White Sheet.</li>
+                </div>
+                <div class="anchor" id="WA_3">
+                    <h2><a href="https://app.leg.wa.gov/billsummary?BillNumber=1850&Year=2021&Initiative=false" target="_blank">Washington Foundational Data Privacy Act</a></h2>
+                    <p>An Act Relating to protecting and enforcing the foundational data
+                        privacy rights of Washingtonians; adding a new section to chapter
+                        42.56 RCW; adding a new chapter to Title 19 RCW; creating new
+                        sections; prescribing penalties; and providing an effective date..</p>
+                    <p>Proposed by Representatives Slatter, Berg, Pollet, and Harris-Talley</p>
+                    <h3>Timeline</h3>
+                    <li>01/07/2022 Bill introduced</li>
+                    <li>01/10/2022 First Reading, referred to Civil Rights & Judiciary</li>
+                    <li>01/25/2022 Public hearing in the House Committee on Civil Rights & Judiciary</li>
+                    <li>01/28/2022 Executive session scheduled, but no action was taken in the House Committee on Civil Rights & Judiciary</li>
+                    <li>02/02/2022 Executive action taken - Majority; 1st substitute bill be substituted, do pass.</li>
+                    <li>02/03/2022 Referred to Appropriations</li>
+                    <li>02/05/2022 Public hearing in the House Committee on Appropriations</li>
+                    <li>02/28/2022 Executive action taken - Majority; 2nd substitute bill be substituted, do pass.</li>
+                    <li>02/28/2022 Referred to Rules 2 Review</li>
+                    <li>03/03/2022 Rules Committee relieved of further consideration. Placed on second reading.</li>
+                    <li>03/10/2022 	Returned to House Rules</li>
+                    <p>* Bill contingent upon enactment of the WPA (SB 5062).</p>
+                </div>
+                <div class="anchor" id="WA_4">
+                    <h2><a href="https://app.leg.wa.gov/billsummary?BillNumber=5813&Initiative=false&Year=2021" target="_blank">Senate Bill 5813</a></h2>
+                    <p>An Act Relating to establishing data privacy protections to
+                        strengthen a consumer's ability to access, manage, and protect their
+                        personal data; adding a new section to chapter 42.56 RCW; adding new
+                        chapters to Title 19 RCW; creating a new section; prescribing
+                        penalties; and providing an effective date.</p>
+                    <p>Proposed by Senators Carlyle, Nguyen, Liias, Lovick, and Pedersen</p>
+                    <h3>Timeline</h3>
+                    <li>01/11/2022 Bill introduced</li>
+                    <li>01/11/2022 First reading, referred to Environment, Energy & Technology</li>
+                    <li>01/20/2022 Public hearing in the Senate Committee on Environment, Energy & Technology</li>
+                </div>
+            </div>
+            <div id='WV_info'> <!-- Inactive -->
+                <p>There is one inactive bill:
+                    <a href="#WV_1">HB 4454</a>
+                </p>
+                <div class="anchor" id="WV_1">
+                    <h2><a href="http://www.wvlegislature.gov/Bill_Status/Bills_history.cfm?input=4454&year=2022&sessiontype=RS&btype=bill" target="_blank">House Bill 4454</a></h2>
+                    <p>The purpose of this bill is to create a consumer right to limit the sale and sharing of
+                        his or her personal information. The bill establishes a consumers’ right to opt-out of any
+                        sale or sharing of his or her personal information. The bill creates a consumers’ right of no
+                        retaliation following any opt-out or exercise of other rights. Finally, the bill provides for
+                        methods of limiting sale, sharing, and use of personal information, as well as any use of
+                        sensitive personal information.</p>
+                    <p>Proposed by Delegates Reed, Kimes, Nestor, Haynes, Worrell, Mallow, Rowan, Riley, Bates, Jennings, and Forsht</p>
+                    <h3>Timeline</h3>
+                    <li>01/31/2022 Bill filed for introduction</li>
+                    <li>01/31/2022 Bill referred to Judiciary committee</li>
+                    <li>01/31/2022 Bill introduced in House</li>
+                    <li>01/31/2022 Bill referred to House Judiciary committee</li>
+                </div>
+            </div>
+            <div id='WI_info'> <!-- Inactive -->
+                <p>There are four inactive bills:
+                    <a href="#WI_1">AB 957</a>,
+                    <a href="#WI_2">SB 957</a>,
+                    <a href="#WI_3">AB 1050</a>, and 
+                    <a href="#WI_4">SB 977</a>
+                </p>
+                <div class="anchor" id = "WI_1">
+                    <h2><a href="https://docs.legis.wisconsin.gov/2021/proposals/reg/asm/bill/ab957" target = "_blank">AB 957</a></h2>
+                    <p>An Act to create 134.985 of the statutes; Relating to: consumer data protection and providing a penalty. (FE)</p>
+                    <p>Proposed by Representatives Zimmerman, Armstrong, Dittrich, Duchow, Horlacher, Knodl, Kuglitsch, Kurtz, Macco, Magnafici, Moses, Murphy, Penterman, Plumer, Pronschinske, Sortwell, Steffen, Subeck, Tauchen, Thiesfeldt, Tittl and Wittke;
+                        cosponsored by Senators Kooyenga, Ballweg, Feyen and Nass</p>
+                    <h3>Timeline</h3>
+                    <li>02/03/2022 Bill introduced</li>
+                    <li>02/03/2022 Read first time and referred to Committee on Consumer Protection</li>
+                    <li>02/16/2022 Public hearing held</li> 
+                    <li>02/18/2022 Assembly Amendment 1 offered by Representative Zimmerman</li>
+                    <li>02/22/2022 Report Assembly Amendment 1 adoption recommended by Committee on Consumer Protection, Ayes 7, Noes 1</li>
+                    <li>02/22/2022 Referred to committee on Rules</li>
+                    <li>02/22/2022 Report passage as amended recommended by Committee on Consumer Protection, Ayes 5, Noes 3</li>
+                    <li>02/22/2022 Made a special order of business at 9:14 AM on 2-23-2022 pursuant to Assembly Resolution 29</li>             
+                    <li>02/23/2022 Read a second time</li>
+                    <li>02/23/2022 Assembly Amendment 1 adopted</li>
+                    <li>02/23/2022 Read a third time and passed, Ayes 59, Noes 37</li>
+                    <li>02/23/2022 Received from Assembly</li>
+                    <li>02/24/2022 Read first time and referred to committee on Government Operations, Legal Review and Consumer Protection</li>
+                    <li>03/15/2022 Failed to concur in pursuant to Senate Joint Resolution 1</li>
+                </div>
+                <div class="anchor" id = "WI_2">
+                    <h2><a href="https://docs.legis.wisconsin.gov/2021/proposals/reg/sen/bill/sb957" target = "_blank">SB 957</a></h2>
+                    <p>An Act to create 134.985 of the statutes; Relating to: consumer data protection and providing a penalty. (FE)</p>
+                    <p>Proposed by  Senators Kooyenga, Ballweg, Feyen and Nass;
+                        cosponsored by Representatives Zimmerman, Armstrong, Dittrich, Duchow, Gundrum, Horlacher, Knodl, Kuglitsch, 
+                        Kurtz, Macco, Magnafici, Moses, Murphy, Penterman, Plumer, Pronschinske, Sortwell, Steffen, Subeck, Tauchen, Thiesfeldt, Tittl and Wittke</p>
+                    <h3>Timeline</h3>
+                    <li>02/09/2022 Bill introduced</li>
+                    <li>02/09/2022 Read first time and referred to Committee on Government Operations, Legal Review and Consumer Protection</li>
+                    <li>02/17/2022 Fiscal estimate received</li>
+                    <li>02/23/2022 Fiscal estimate received</li>
+                    <li>03/15/2022 Failed to pass pursuant to Senate Joint Resolution 1</li>
+                </div>
+                <div class="anchor" id = "WI_3">
+                    <h2><a href="https://docs.legis.wisconsin.gov/2021/proposals/reg/asm/bill/ab1050" target = "_blank">AB 1050</a></h2>
+                    <p>An Act to create 134.985 of the statutes; Relating to: the privacy of consumer data, granting rule-making authority, and providing a penalty. (FE)</p>
+                    <p>Proposed by Representatives Brostoff, Hebl, Anderson, Sinicki, Shelton, Stubbs and Cabrera;
+                        cosponsored by Senators Larson, Carpenter, Roys, Agard and Smith</p>
+                    <h3>Timeline</h3>
+                    <li>02/17/2022 Bill introduced</li>
+                    <li>02/17/2022 Read first time and referred to Committee on Consumer Protection</li>
+                    <li>03/15/2022 Failed to pass pursuant to Senate Joint Resolution 1</li> 
+                </div>
+                <div class="anchor" id = "WI_4">
+                    <h2><a href="https://docs.legis.wisconsin.gov/2021/proposals/reg/sen/bill/sb977" target = "_blank">SB 977</a></h2>
+                    <p>An Act to create 134.985 of the statutes; Relating to: the privacy of consumer data, granting rule-making authority, and providing a penalty. (FE)</p>
+                    <p>Proposed by Senators Larson, Carpenter, Roys, Agard and Smith;
+                        cosponsored by Representatives Brostoff, Hebl, Anderson, Sinicki, Shelton, Stubbs and Cabrera</p>
+                    <h3>Timeline</h3>
+                    <li>02/09/2022 Bill introduced</li>
+                    <li>02/09/2022 Read first time and referred to Committee on Government Operations, Legal Review and Consumer Protection</li>
+                    <li>03/15/2022 Failed to pass pursuant to Senate Joint Resolution 1</li> 
+                </div>
+            </div>
+            <div id='back_to_top'>
+                <p>Back to <a href="#top">top</a></p>
+            </div>
+        </div>
+    </div>
 </body>
 </html>
